@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>User info</title>
+    <title>Users</title>
 </head>
 <body>
-<div th:switch="${user}">
+<div th:switch="${users}">
     <h2 th:case="null">No users found!</h2>
     <div th:case="*">
-        <h2>User info</h2>
+        <h2>Users</h2>
         <table>
             <thead>
             <tr>
@@ -20,18 +20,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${user}">
+            <tr th:each="user : ${users}">
                 <td th:text="${user.getId}"></td>
                 <td th:text="${user.getFirstName}"></td>
                 <td th:text="${user.getLastName}"></td>
                 <td th:text="${user.getEmail}"></td>
                 <td th:text="${user.getAge}"></td>
+                <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
+                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
             </tr>
-
             </tbody>
         </table>
     </div>
-    </div>
+    <p><a href="/admin/user-create">Create user</a></p>
+</div>
 </body>
-
 </html>
