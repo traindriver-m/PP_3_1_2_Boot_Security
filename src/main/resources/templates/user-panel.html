@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.getEmail()}">Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <p class="navbar-brand text-white">
+            <b><span class="align-middle" th:text="${user.getEmail()}"></span></b>
+            <span class="align-middle">with roles:</span>
+        <td><span th:each="role:${user.roles}" th:text="${role.role} + ' '"/></td>
+        </p>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-dark text-secondary">Logout</button>
+        </form>
+    </div>
+</nav>
+<div class="page-header">
+    <h1>
+        <span></span>
+    </h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-3 flex-column bg-white">
+            <a class="nav-link active bg-primary text-white" aria-current="page">User</a>
+        </nav>
+        <nav class="col flex-column">
+            <h2>User information-page</h2>
+            <div class="row-cols-auto  bg-white no-gutters">
+                <div class="col-12 bg-light border">
+                    <h5 class="pl-3 pt-2 pb-2">About user</h5>
+                </div>
+                <div class="col-12 pl-3 pr-3 pt-3 border">
+                    <table class="table table-striped ">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.firstName}"></td>
+                            <td th:text="${user.lastName}"></td>
+                            <td th:text="${user.age}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td>
+                                <div class="d-inline" th:each="role : ${user.getRoles()}">
+                                    <p class="d-inline" th:text="${role}"></p>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

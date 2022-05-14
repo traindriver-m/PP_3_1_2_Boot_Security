@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kata.spring.boot_security.demo.models.User;
 
 @Controller
-@RequestMapping( "/user")
+@RequestMapping("/user")
 public class UserController {
 
     @GetMapping("")
     public String showUserInfo(@CurrentSecurityContext(expression = "authentication.principal") User principal,
                                Model model) {
-        model.addAttribute("user", principal);
-        return "user";
+        model.addAttribute("user" , principal);
+        return "user-panel";
     }
 }
