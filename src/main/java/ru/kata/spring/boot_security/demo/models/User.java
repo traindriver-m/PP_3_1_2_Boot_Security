@@ -10,6 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,10 +19,9 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private int age;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_roles" , joinColumns = @JoinColumn(name = "user_id")
             , inverseJoinColumns = @JoinColumn(name = "roles_id"))
-
     private Set<Role> roles;
 
     public User() {
@@ -113,4 +113,5 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }
