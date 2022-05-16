@@ -67,24 +67,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="person:${users}">
-                            <td th:text="${person.id}"></td>
-                            <td th:text="${person.firstName}"></td>
-                            <td th:text="${person.lastName}"></td>
-                            <td th:text="${person.age}"></td>
-                            <td th:text="${person.email}"></td>
-                            <td><span th:each="role:${person.roles}" th:text="${role.role} + ' '"/></td>
+                        <tr th:each="user:${users}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.firstName}"></td>
+                            <td th:text="${user.lastName}"></td>
+                            <td th:text="${user.age}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td><span th:each="role:${user.roles}" th:text="${role.role} + ' '"/></td>
                             <td>
                                 <button class="btn btn-info"
                                         data-toggle="modal"
                                         data-target="#modal-edit"
-                                        th:attrappend="data-target=${person.id}"
+                                        th:attrappend="data-target=${user.id}"
                                         th:text="'Edit'">
 
                                 </button>
 
                                 <div class="modal fade text-center"
-                                     th:id="'modal-edit' + ${person.id}"
+                                     th:id="'modal-edit' + ${user.id}"
                                      role="dialog"
                                      tabindex="-1"
                                      aria-hidden="true">
@@ -101,46 +101,46 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body text-center col-5 offset-2 col-md-5 offset-md-2">
-                                                <form action="#" th:action="@{/admin/edit/{id}(id=${person.id})}"
-                                                      th:object="${person}"
+                                                <form action="#" th:action="@{/admin/edit/{id}(id=${user.id})}"
+                                                      th:object="${user}"
                                                       th:method="PATCH">
 
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="person_id">ID</label>
-                                                        <input type="text" id="person_id" th:value="${person.id}"
+                                                        <input type="text" id="id" th:value="${user.id}"
                                                                th:name="id" disabled>
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="names">First Name</label>
-                                                        <input type="text" id="names" th:value="${person.firstName}"
+                                                        <input type="text" id="name" th:value="${user.firstName}"
                                                                th:name="firstName">
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="lastnames">Last
                                                             name</label>
-                                                        <input type="text" id="lastnames" th:value="${person.lastName}"
+                                                        <input type="text" id="lastname" th:value="${user.lastName}"
                                                                th:name="lastName">
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="age">Age</label>
-                                                        <input type="text" id="age" th:value="${person.age}"
+                                                        <input type="text" id="val_age" th:value="${user.age}"
                                                                th:name="age">
                                                     </div>
                                                     <div class="form-group text-center">
-                                                        <label class="font-weight-bold" for="names">Email</label>
-                                                        <input type="text" id="email" th:value="${person.email}"
+                                                        <label class="font-weight-bold" for="email">Email</label>
+                                                        <input type="text" id="mail" th:value="${user.email}"
                                                                th:name="email">
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="pass">Password</label>
-                                                        <input type="text" id="pass" th:value="${person.password}"
+                                                        <input type="text" id="pass" th:value="${user.password}"
                                                                th:name="password">
                                                     </div>
-                                                    <select multiple class="form-control" id="roles"
+                                                    <select multiple class="form-control" id="role"
                                                             th:size="${roleset.size()}" th:name="roles">
                                                         <th:block th:each="role:${roleset}">
                                                             <option th:text="${role.role}" th:value="${role.getId()}"
-                                                                    th:selected="${person.getRoles().contains(role)}"/>
+                                                                    th:selected="${user.getRoles().contains(role)}"/>
                                                         </th:block>
                                                     </select>
                                                     <div class="modal-footer">
@@ -159,11 +159,11 @@
                                 <button class="btn btn-danger"
                                         data-toggle="modal"
                                         data-target="#modal-delete"
-                                        th:attrappend="data-target=${person.id}"
+                                        th:attrappend="data-target=${user.id}"
                                         th:text="'Delete'">
                                 </button>
                                 <div class="modal fade text-center"
-                                     th:id="'modal-delete' + ${person.id}"
+                                     th:id="'modal-delete' + ${user.id}"
                                      role="dialog"
                                      tabindex="-1"
                                      aria-hidden="true">
@@ -180,46 +180,46 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body text-center col-5 offset-2 col-md-5 offset-md-2">
-                                                <form action="#" th:action="@{/admin/delete/{id}(id=${person.id})}"
-                                                      th:object="${person}"
+                                                <form action="#" th:action="@{/admin/delete/{id}(id=${user.id})}"
+                                                      th:object="${user}"
                                                       th:method="DELETE">
 
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="person_id">ID</label>
-                                                        <input type="text" id="person_id" th:value="${person.id}"
+                                                        <input type="text" id="person_id" th:value="${user.id}"
                                                                th:name="id" disabled>
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="names">First Name</label>
-                                                        <input type="text" id="names" th:value="${person.firstName}"
+                                                        <input type="text" id="names" th:value="${user.firstName}"
                                                                th:name="firstName" disabled>
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="lastnames">Last
                                                             name</label>
-                                                        <input type="text" id="lastnames" th:value="${person.lastName}"
+                                                        <input type="text" id="lastnames" th:value="${user.lastName}"
                                                                th:name="lastName" disabled>
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="age">Age</label>
-                                                        <input type="text" id="age" th:value="${person.age}"
+                                                        <input type="text" id="age" th:value="${user.age}"
                                                                th:name="age" disabled>
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="email">Email</label>
-                                                        <input type="text" id="email" th:value="${person.email}"
+                                                        <input type="text" id="email" th:value="${user.email}"
                                                                th:name="email" disabled>
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <label class="font-weight-bold" for="password">Password</label>
-                                                        <input type="text" id="password" th:value="${person.password}"
+                                                        <input type="text" id="password" th:value="${user.password}"
                                                                th:name="password" disabled>
                                                     </div>
                                                     <select multiple class="form-control" id="roles"
                                                             th:size="${roleset.size()}" th:name="roles">
                                                         <th:block th:each="role:${roleset}">
                                                             <option th:text="${role.role}" th:value="${role.getId()}"
-                                                                    th:selected="${person.getRoles().contains(role)}"
+                                                                    th:selected="${user.getRoles().contains(role)}"
                                                                     th:name="role" disabled/>
 
                                                         </th:block>
