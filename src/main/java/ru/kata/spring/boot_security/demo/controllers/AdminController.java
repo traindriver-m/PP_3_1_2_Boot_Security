@@ -25,7 +25,17 @@ public class AdminController {
         this.roleRepository = roleRepository;
     }
 
-    @GetMapping("")
+        @GetMapping("")
+    public String findAll(@AuthenticationPrincipal User user, Model model) {
+        List<User> users = service.findAll();
+        model.addAttribute("users" , users);
+        model.addAttribute("roleset" , roleRepository.findAll());
+        model.addAttribute("useradd" , new User());
+        model.addAttribute("user" , user);
+        return "js-admin";
+    }
+
+ /*   @GetMapping("")
     public String findAll(@AuthenticationPrincipal User user, Model model) {
         List<User> users = service.findAll();
         model.addAttribute("users" , users);
@@ -33,7 +43,7 @@ public class AdminController {
         model.addAttribute("useradd" , new User());
         model.addAttribute("user" , user);
         return "admin-panel";
-    }
+    } */
 
     @PostMapping("/add")
     public String createUser(User user) {

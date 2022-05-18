@@ -9,7 +9,9 @@ public interface UserService {
 
     List<User> findAll();
 
-    void delete(Long id);
+    boolean delete(Long id);
 
     User findById(Long id);
+
+    User findByEmail(String email);
 }

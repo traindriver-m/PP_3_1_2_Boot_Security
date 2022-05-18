@@ -28,12 +28,18 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void delete(Long id) {
+    public boolean delete(Long id) {
         userRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public User findById(Long id) {
-        return userRepository.getOne(id);
+        return userRepository.findById(id).get();
+    }
+
+    @Override
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 }
