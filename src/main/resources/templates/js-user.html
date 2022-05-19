@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
 <div th:fragment="content">
-  <div class="row-cols-auto  bg-white no-gutters">
-    <div class="col-12 bg-light border">
-      <h5 class="pl-3 pt-2 pb-2">All users</h5>
+    <div class="row-cols-auto  bg-white no-gutters">
+        <div class="col-12 bg-light border">
+            <h5 class="pl-3 pt-2 pb-2">All users</h5>
+        </div>
+        <div class="col-12 pl-3 pr-3 pt-3 border">
+            <table class="table table-striped ">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody id="tableUserBody">
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-12 pl-3 pr-3 pt-3 border">
-      <table class="table table-striped ">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Age</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody id="tableUserBody">
-        </tbody>
-      </table>
-    </div>
-  </div>
 
-  <script defer>
-    fetch('/api/all-users').then(res => {
-              let temp = "";
-              res.json().then(userTable => {
+    <script defer>
+        fetch('/api/all-users').then(res => {
+                let temp = "";
+                res.json().then(userTable => {
                         userTable.forEach(item => {
-                          temp += "<tr>";
-                          temp += "<td>" + item.id + "</td>";
-                          temp += "<td>" + item.firstName + "</td>";
-                          temp += "<td>" + item.lastName + "</td>";
-                          temp += "<td>" + item.age + "</td>";
-                          temp += "<td>" + item.email + "</td>";
-                          temp+= '<td>';
-                          item.roles.forEach(role => {
-                            temp += role.role + ' ';
-                          })
-                          temp+= '</td>';
-                          temp += "<td><button class='btn btn-info' onclick='editUserBTN(this)' id='editBTN'" + item.id + '>Edit</button></td>';
-                          temp += "<td><button class='btn btn-info' onclick='deleteUserBTN(this)' id='deleteBTN'" + item.id + '>Delete</button></td></tr>';
+                            temp += "<tr>";
+                            temp += "<td>" + item.id + "</td>";
+                            temp += "<td>" + item.firstName + "</td>";
+                            temp += "<td>" + item.lastName + "</td>";
+                            temp += "<td>" + item.age + "</td>";
+                            temp += "<td>" + item.email + "</td>";
+                            temp += '<td>';
+                            item.roles.forEach(role => {
+                                temp += role.role + ' ';
+                            })
+                            temp += '</td>';
+                            temp += "<td><button class='btn btn-info' onclick='editUserBTN(this)' id='editBTN'" + item.id + '>Edit</button></td>';
+                            temp += "<td><button class='btn btn-info' onclick='deleteUserBTN(this)' id='deleteBTN'" + item.id + '>Delete</button></td></tr>';
 
                         })
                         document.getElementById("tableUserBody").innerHTML = temp;
-                      }
-              )
+                    }
+                )
             }
-    )
-  </script>
+        )
+    </script>
 </div>
 </body>
 </html>
+
