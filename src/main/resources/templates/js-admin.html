@@ -183,7 +183,7 @@
     let allRoles = [];
     let allUsers = [];
 
-    fetch('/api/all-users').then(listUser => {
+    fetch('/api/users').then(listUser => {
             listUser.json().then(user => {
                     allUsers = user;
                     console.log(allUsers);
@@ -193,7 +193,7 @@
         }
     )
 
-    fetch('/api/all-roles').then(
+    fetch('/api/roles').then(
         list => {
             list.json().then(
                 roles => {
@@ -230,7 +230,7 @@
                 })
             }
         })
-        fetch("/api/create-user", {
+        fetch("/api/create", {
             method: 'POST',
             body: JSON.stringify(editUser),
             headers: {'Content-Type': 'application/json'}
@@ -256,7 +256,7 @@
         let id = document.getElementById("idDeleteModal").value;
         $('#deleteModalUser').modal('hide');
 
-             fetch('/api/delete-user/' + id, {
+             fetch('/api/users/' + id, {
                  method: 'DELETE'
              }).then(res => {
                  if (res.ok) {
@@ -359,14 +359,14 @@
                 })
             }
         });
-        fetch('/api/create-user', {
+        fetch('/api/create', {
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             Accept: 'application/json, */*; q=0.01',
             body: JSON.stringify(newUser)
         }).then(resp => {
             if (resp.ok) {
-                fetch('/api/one/' + newUser.email).then(otv => {
+                fetch('/api/user/' + newUser.email).then(otv => {
                     otv.json().then(otv1 => {
                         allUsers.push(otv1);
                         createTable();
@@ -382,7 +382,7 @@
                 })
             }
         })
-
+        $('#usersTableBtn').click();
     })
 </script>
 </body>

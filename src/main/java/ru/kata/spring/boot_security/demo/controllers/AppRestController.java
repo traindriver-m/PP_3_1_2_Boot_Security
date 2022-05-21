@@ -24,13 +24,13 @@ public class AppRestController {
         this.roleRepository = roleRepository;
     }
 
-    @PostMapping("/create-user")
+    @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody User user) {
         service.add(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/all-users")
+    @GetMapping("/users")
     public ResponseEntity<List<User>> readAll() {
         List<User> list = service.findAll();
         return list != null && !list.isEmpty()
@@ -46,19 +46,19 @@ public class AppRestController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/one/{email}")
+    @GetMapping("/user/{email}")
     public ResponseEntity<User>get(@PathVariable String email){
         User user = service.findByEmail(email);
         return user !=null ? new ResponseEntity<>(user, HttpStatus.OK):new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/all-roles")
+    @GetMapping("/roles")
     public ResponseEntity<List<Role>> getAllRoles(){
         List<Role> list = roleRepository.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete-user/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<User> delete(@PathVariable Long id) {
         boolean bool = service.delete(id);
         return bool
